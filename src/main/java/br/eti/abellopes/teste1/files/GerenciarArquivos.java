@@ -61,17 +61,24 @@ public class GerenciarArquivos {
         contentOfFiles.forEach((k,v) -> v.forEach(System.out::println));
     }
     public static void ReadAllLinesFile(Path path) {
+        Charset charset = Charset.forName("UTF-8");
+	    try {
+	      List<String> lines = Files.readAllLines(path, charset);
+	      lines.forEach(item ->{
+	    	  System.out.println(item);
+	    	  tratarLinha(item);
+	      });
+	    } catch (IOException e) {
+	      System.out.println(e);
+	    }
 
-        Charset charset = Charset.forName("ISO-8859-1");
-        try {
-          List<String> lines = Files.readAllLines(path, charset);
+    }
 
-          for (String line : lines) {
-            System.out.println(line);
-          }
-        } catch (IOException e) {
-          System.out.println(e);
-        }
-
-      }
+	private static void tratarLinha(String item) {
+		String[] itens = item.split("ç");
+		for (String s : itens) {
+			System.out.println("Item Da Linha = " + s);			
+		}
+		
+	}
 }
