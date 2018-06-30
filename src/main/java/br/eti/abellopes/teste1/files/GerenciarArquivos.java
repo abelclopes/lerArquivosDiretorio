@@ -1,6 +1,7 @@
 package br.eti.abellopes.teste1.files;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -59,4 +60,18 @@ public class GerenciarArquivos {
         System.out.println("Content of files:");
         contentOfFiles.forEach((k,v) -> v.forEach(System.out::println));
     }
+    public static void ReadAllLinesFile(Path path) {
+
+        Charset charset = Charset.forName("ISO-8859-1");
+        try {
+          List<String> lines = Files.readAllLines(path, charset);
+
+          for (String line : lines) {
+            System.out.println(line);
+          }
+        } catch (IOException e) {
+          System.out.println(e);
+        }
+
+      }
 }
